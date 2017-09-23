@@ -3,3 +3,7 @@ boto3
 django-storages
 google-cloud
 django-mediumeditor
+boto
+django
+django-ckeditor
+MySQL-python
