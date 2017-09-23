@@ -18,11 +18,21 @@ from django.contrib import admin
 
 from blog import views
 
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-	url(r'^blog/', views.detail, name ='details'),
+	url(r'^blog/$', views.detail, name ='details'),
+    url(r'^blog/(?P<post_id>\d+)/$', views.post, name ='post'),
+
 
 
 ]
+
+# if settings.DEBUG:
+	
+# 	urlpatterns = [
+# 	    # ... the rest of your URLconf goes here ...
+# 	] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

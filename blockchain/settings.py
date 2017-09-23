@@ -20,12 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(is7x@8njt)c&uyjv5%d7_g6re5rnn7c(w5p6*awdy=3vts7x#'
+SECRET_KEY = os.environ['SECRET_KEY']
+print SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['35.197.128.227', '127.0.0.1']
 
 
 # Application definition
@@ -43,6 +44,8 @@ INSTALLED_APPS = [
 
     ## 3rd party
     'mediumeditor',
+    'ckeditor',
+    'storages',
 
 ]
 
@@ -75,7 +78,10 @@ TEMPLATES = [
 ]
 
 
-
+DEFAULT_FILE_STORAGE = 'storages.backends.gs.GSBotoStorage'
+GS_ACCESS_KEY_ID = os.environ["GS_ACCESS_KEY_ID"]
+GS_SECRET_ACCESS_KEY = os.environ['GS_SECRET_ACCESS_KEY']
+GS_BUCKET_NAME = 'blogmedia'
 
 
 WSGI_APPLICATION = 'blockchain.wsgi.application'
@@ -87,9 +93,9 @@ WSGI_APPLICATION = 'blockchain.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'myblogdb',
+        'NAME': os.environ['NAME'],
         'USER': 'root',
-        'PASSWORD': 'rtjzI5rPN1sKPxN4',
+       
         'HOST': '35.194.131.25',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
@@ -140,5 +146,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+
 
